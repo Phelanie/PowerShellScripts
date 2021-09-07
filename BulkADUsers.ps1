@@ -1,5 +1,7 @@
 ﻿#Enter a path to your import CSV file
 $ADUsers = Import-csv E:\Mod08\Democode\newusers.csv
+$ExpDate = (Get-Date).AddYears(3)
+
 
 foreach ($User in $ADUsers)
 {
@@ -33,7 +35,8 @@ foreach ($User in $ADUsers)
             -DisplayName "$Lastname, $Firstname" `
             -Department $Department `
             -Path $OU `
-            -AccountPassword (convertto-securestring $Password -AsPlainText -Force)
+            -AccountPassword (convertto-securestring $Password -AsPlainText -Force) `
+            -AccountExpirationDate $ExpDate
 
        }
 }
